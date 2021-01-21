@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Name Database</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div style="position:fixed;top:10px;left:10px;">
+    <input type="range" min="3" max="16" step="1" value= "3" id="min"/> <span id="minVal">3</span> <br>
+    <input type="range" min="3" max="16" step="1" value="16" id="max"/> <span id="maxVal">16</span>
+  </div>
+  <div class="cntnt">
+    <input type="text" id="name" autocomplete="off" placeholder="Search (regex)...">
+    <p id="results"></p>
+    <script src="namedb.js"></script>
+    <script src="main.js"></script>
+  </div>
+</body>
+</html>
