@@ -6,19 +6,27 @@ let colors = ["red","orange","yellow","lime","#4682b4","pink","magenta","grey","
 async function onChange(query){
   num++;
   let numCache = num, min = document.getElementById("min").value, max = document.getElementById("max").value;
-  document.getElementById("results").innerHTML = "";
-  if(query !== ""){
-    let reg = new RegExp(query.split("*").join("."), "gi");
-    let chance = ((Math.floor(Math.random() * 100) === 50) ? true:false);
-    for(let i = 0; i < words.length; i++){
-      if(numCache === num && words[i].match(reg) !== null && (words[i].length >= min && words[i].length <= max)){
-        if(chance) {
-          document.getElementById("results").innerHTML += `<br><a style="text-decoration:underline;cursor:pointer;color:${colors[Math.floor(Math.random() * colors.length - 1)]}" onclick="window.open('https://namemc.com/search?q=${words[i]}')">${words[i]}</a>`;
-        }else {
-          document.getElementById("results").innerHTML += `<br><a style="text-decoration:underline;cursor:pointer;color:#4682b4" onclick="window.open('https://namemc.com/search?q=${words[i]}')">${words[i]}</a>`;
+  if(query.length < 5){
+    await sleep(500);
+  }
+  if(num === numCache){
+    document.getElementById("results").innerHTML = "";
+    if(query !== ""){
+      let reg = new RegExp(query.split("*").join("."), "gi");
+      let chance = ((Math.floor(Math.random() * 100) === 50) ? true:false);
+      let ihCache = "";
+      document.getElementById("results").innerHTML = "Searching database...";
+      await sleep(10);
+      for(let i = 0; i < words.length; i++){
+        if(numCache === num && words[i].match(reg) !== null && (words[i].length >= min && words[i].length <= max)){
+          if(chance) {
+            ihCache += `<br><a style="text-decoration:underline;cursor:pointer;color:${colors[Math.floor(Math.random() * colors.length - 1)]}" onclick="window.open('https://namemc.com/search?q=${words[i]}')">${words[i]}</a>`;
+          } else {
+            ihCache += `<br><a style="text-decoration:underline;cursor:pointer;color:#4682b4" onclick="window.open('https://namemc.com/search?q=${words[i]}')">${words[i]}</a>`;
+          }
         }
-        await sleep(0);
       }
+      document.getElementById("results").innerHTML = ihCache;
     }
   }
 }
